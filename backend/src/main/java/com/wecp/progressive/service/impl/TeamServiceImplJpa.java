@@ -19,7 +19,6 @@ import com.wecp.progressive.service.TeamService;
 @Service
 public class TeamServiceImplJpa implements TeamService
 {
-    @Autowired
     private TeamRepository teamRepository;
     @Autowired
     private CricketerRepository cricketerRepository;
@@ -32,13 +31,7 @@ public class TeamServiceImplJpa implements TeamService
 
     public int addTeam(Team team)
     {
-        Team t = teamRepository.findByTeamName(team.getTeamName());
-
-        // if(teamRepository.existsById(team.getTeamId())){
-        //     throw new TeamAlreadyExistsException("Team already exists!");
-        // }
-        
-        if(t.getTeamName().equalsIgnoreCase(team.getTeamName())){
+        if(teamRepository.existsById(team.getTeamId())){
             throw new TeamAlreadyExistsException("Team already exists!");
         }
         Team teamObj = teamRepository.save(team);
@@ -78,14 +71,10 @@ public class TeamServiceImplJpa implements TeamService
 
     public void updateTeam(Team team)
     {
-        if(!teamRepository.existsById(team.getTeamId())){
-            throw new TeamDoesNotExistException("");
-        }
         Team teamObj = teamRepository.findById(team.getTeamId()).get();
-        if(teamObj.getTeamName().equalsIgnoreCase(team.getTeamName())){
+        if(teamObj.getTeamName().equals(team.getTeamName())){
             throw new TeamAlreadyExistsException("Team already exists!");
         }
-        teamObj.setTeamId(team.getTeamId());
         teamObj.setTeamName(team.getTeamName());
         teamObj.setOwnerName(team.getOwnerName());
         teamObj.setLocation(team.getLocation());

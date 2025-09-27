@@ -125,16 +125,6 @@ public class Cricketer implements Comparable<Cricketer>
         this.totalWickets = totalWickets;
     }
 
-    
-
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
     @Override
     public int compareTo(Cricketer o) 
     {
