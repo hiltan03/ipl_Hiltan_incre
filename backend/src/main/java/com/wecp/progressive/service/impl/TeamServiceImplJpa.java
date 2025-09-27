@@ -1,3 +1,4 @@
+
 package com.wecp.progressive.service.impl;
 
 import java.util.ArrayList;
@@ -5,6 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,19 +33,28 @@ public class TeamServiceImplJpa implements TeamService
 
     public int addTeam(Team team)
     {
-        if(teamRepository.existsById(team.getTeamId())){
-            throw new TeamAlreadyExistsException("Team already exists!");
+        // if(teamRepository.existsById(team.getTeamId()))
+        // {
+        //     throw new TeamAlreadyExistsException("");
+        // }
+        //Optional<Team> teamop = teamRepository.findById(team.getTeamId());
+        Team teamObj = teamRepository.findByTeamName(team.getTeamName());
+        if(teamObj.getTeamName().equalsIgnoreCase(team.getTeamName()))
+        {
+            throw new TeamAlreadyExistsException("");
         }
-        Team teamObj = teamRepository.save(team);
+
+        teamObj = teamRepository.save(team);
         return teamObj.getTeamId();
     }
 
     public void deleteTeam(int teamId)
     { 
-        if(!teamRepository.existsById(teamId)){
-            throw new TeamDoesNotExistException("Team does not exist ra");
-        }
         //TeamService.super.deleteTeam(teamId);
+        if(!teamRepository.existsById(teamId))
+        {
+            throw new TeamDoesNotExistException("");
+        }
         teamRepository.deleteById(teamId);
     }
 
@@ -71,10 +82,17 @@ public class TeamServiceImplJpa implements TeamService
 
     public void updateTeam(Team team)
     {
-        Team teamObj = teamRepository.findById(team.getTeamId()).get();
-        if(teamObj.getTeamName().equals(team.getTeamName())){
-            throw new TeamAlreadyExistsException("Team already exists!");
+        if(!teamRepository.existsById(team.getTeamId()))
+        {
+            throw new TeamDoesNotExistException("");
         }
+        Team teamObj = teamRepository.findByTeamName(team.getTeamName());
+        if(teamObj.getTeamName().equalsIgnoreCase(team.getTeamName()))
+        {
+            throw new TeamAlreadyExistsException("");
+        }
+        //Team teamObj = teamRepository.findById(team.getTeamId()).get();
+        teamObj.setTeamId(team.getTeamId());
         teamObj.setTeamName(team.getTeamName());
         teamObj.setOwnerName(team.getOwnerName());
         teamObj.setLocation(team.getLocation());
