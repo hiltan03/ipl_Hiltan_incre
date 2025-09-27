@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 import com.wecp.progressive.repository.MatchRepository;
 import com.wecp.progressive.service.MatchService;
 import com.wecp.progressive.entity.*;
+<<<<<<< HEAD
 import com.wecp.progressive.exception.NoMatchesFoundException;
 
+=======
+>>>>>>> 03b6f3e6055d47f107e87e6c604234d2bead24f3
 import java.sql.SQLException;
 
 import java.util.*;
@@ -63,9 +66,12 @@ public class MatchServiceImplJpa implements MatchService
     public List<Match> getAllMatchesByStatus(String status) throws SQLException 
     {
        // return MatchService.super.getAllMatchesByStatus(status);
+<<<<<<< HEAD
        if(matchRepository.findAllByStatus(status).isEmpty()){
         throw new NoMatchesFoundException("no match nahi");
        }
+=======
+>>>>>>> 03b6f3e6055d47f107e87e6c604234d2bead24f3
        return matchRepository.findAllByStatus(status);
     }  
 }

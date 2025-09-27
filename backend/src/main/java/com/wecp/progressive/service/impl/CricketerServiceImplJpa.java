@@ -6,8 +6,11 @@ import org.springframework.stereotype.Service;
 import com.wecp.progressive.repository.CricketerRepository;
 import com.wecp.progressive.service.CricketerService;
 import com.wecp.progressive.entity.*;
+<<<<<<< HEAD
 import com.wecp.progressive.exception.TeamCricketerLimitExceededException;
 
+=======
+>>>>>>> 03b6f3e6055d47f107e87e6c604234d2bead24f3
 import java.util.List;
 import java.util.Comparator;
 import java.sql.SQLException;
@@ -29,9 +32,12 @@ public class CricketerServiceImplJpa implements CricketerService
 
     public Integer addCricketer(Cricketer cricketer) throws SQLException
     {
+<<<<<<< HEAD
         if(cricketerRepository.findAll().size() > 11){
             throw new TeamCricketerLimitExceededException("Limit of team exceeded");
         }
+=======
+>>>>>>> 03b6f3e6055d47f107e87e6c604234d2bead24f3
         Cricketer obj = cricketerRepository.save(cricketer);
         return (obj.getCricketerId());
     }
