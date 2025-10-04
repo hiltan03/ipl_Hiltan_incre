@@ -17,9 +17,9 @@ import javax.crypto.SecretKey;
 @Component
 public class JwtUtil {
  
-    private final String secret = "secretKey000000"; // Secret key for signing JWT
+    private final String secret = "secretKey000000000000000000000000000000000000000000000000000000000000"; // Secret key for signing JWT
     //private final SecretKey secret = Keys.secretKeyFor(SignatureAlgorithm.HS512);
-    private final int expiration = 86400 * 1000; // Token expiration (24 hours in ms)
+    private final int expiration = 1000*60*60*10; // Token expiration (24 hours in ms)
  
  //   Generate token with username
     public String generateToken(String username) {
