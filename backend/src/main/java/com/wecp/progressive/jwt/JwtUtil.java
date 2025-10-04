@@ -75,6 +75,7 @@
  
 
 package com.wecp.progressive.jwt;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -91,13 +92,8 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    private final SecretKey key; // Use a SecretKey object
+    private static final SecretKey KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
     private final int expiration = 1000 * 60 * 60 * 10; // Token expiration (10 hours in ms)
-
-    // Constructor to generate a secure key once
-    public JwtUtil() {
-        this.key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-    }
 
     // Generate token with username
     public String generateToken(String username) {
@@ -111,7 +107,7 @@ public class JwtUtil {
                 .setSubject(subject)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(key) // Use the SecretKey object
+                .signWith(KEY)
                 .compact();
     }
 
@@ -119,7 +115,7 @@ public class JwtUtil {
     public Claims extractAllClaims(String token) {
         try {
             return Jwts.parserBuilder()
-                    .setSigningKey(key) // Use the SecretKey object
+                    .setSigningKey(KEY)
                     .build()
                     .parseClaimsJws(token)
                     .getBody();
@@ -155,3 +151,4 @@ public class JwtUtil {
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
 }
+
