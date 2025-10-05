@@ -21,6 +21,7 @@ public class UserLoginController {
         return new ResponseEntity<>(userLoginServiceImpl.createUser(user),HttpStatus.OK);
     }
 
+    @PostMapping
     public ResponseEntity loginUser(LoginRequest loginRequest) {
         //userLoginServiceImpl.
         return new ResponseEntity<>(HttpStatus.OK);
