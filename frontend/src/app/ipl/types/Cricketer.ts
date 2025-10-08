@@ -1,13 +1,13 @@
 export class Cricketer {
     cricketerId : number;
     teamId: number;
-  cricketerName: string;
-  age: number;
-  nationality: string;
-  experience: number;
-  role: string;
-  totalRuns: number;
-  totalWickets: number;
+    cricketerName: string;
+    age: number;
+    nationality: string;
+    experience: number;
+    role: string;
+    totalRuns: number;
+    totalWickets: number;
   
   constructor(cricketerId : number, teamId: number, cricketerName: string, age: number, nationality: string,
   experience: number,role: string, totalRuns: number, totalWickets: number){
